@@ -1,0 +1,12 @@
+version: 2.1
+
+description: >
+  Simple orb to build parts of Studion Platform projects. The orb expects Dockerfile
+  and will upload the built image to AWS ECR.
+
+display:
+  home_url: "https://github.com/ExtensionEngine/pipeline-build-orb"
+  source_url: "https://github.com/ExtensionEngine/pipeline-build-orb"
+
+orbs:
+  aws-ecr: circleci/aws-ecr@9.0.4

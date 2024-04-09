@@ -1,0 +1,12 @@
+description: >
+  This is how we can use this job to build server image with Docker.
+usage:
+  version: 2.1
+  orbs:
+    studion-build: studion/studion-build@1.0.0
+  workflows:
+    use-my-orb:
+      jobs:
+        - studion-build/build_server:
+            - param1: 1
+            - param2: 2

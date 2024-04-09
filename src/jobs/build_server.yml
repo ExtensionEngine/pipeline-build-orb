@@ -1,0 +1,44 @@
+description: >
+  Build Docker image and push to AWS ECR.
+executor:
+  name: aws-ecr/default
+  docker_layer_caching: true
+parameters:
+  access_key:
+    type: string
+    default: AWS_ACCESS_KEY_ID
+    description: ENV value name for the AWS access key.
+  secret_key:
+    type: string
+    default: AWS_SECRET_ACCESS_KEY
+    description: ENV value name for the AWS secret key.
+  region:
+    type: string
+    default: us-east-1
+    description: AWS region value.
+  account_id:
+    type: string
+    description: AWS account ID value.
+  ecr_repo:
+    type: string
+    description: AWS ECR repo name.
+  extra_build_args:
+    type: string
+    default: ""
+    description: Extra build args passed to docker builder.
+resource_class: medium
+steps:
+  - aws-ecr/build_and_push_image:
+      auth:
+        - aws-cli/setup:
+            aws_access_key_id: << parameters.access_key >>
+            aws_secret_access_key: << parameters.secret_key >>
+            region: << parameters.region >>
+      account_id: << parameters.account_id >>
+      attach_workspace: true
+      checkout: false
+      extra_build_args: << parameters.extra_build_args >>
+      region: << parameters.region >>
+      repo: << parameters.ecr_repo >>
+      repo_encryption_type: KMS
+      tag: latest,${CIRCLE_SHA1}
