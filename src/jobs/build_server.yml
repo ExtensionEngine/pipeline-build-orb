@@ -4,14 +4,9 @@ executor:
   name: aws-ecr/default
   docker_layer_caching: true
 parameters:
-  access_key:
+  role_arn:
     type: string
-    default: AWS_ACCESS_KEY_ID
-    description: ENV value name for the AWS access key.
-  secret_key:
-    type: string
-    default: AWS_SECRET_ACCESS_KEY
-    description: ENV value name for the AWS secret key.
+    description: AWS ARN of the OpenID role connected to OpenID provider.
   region:
     type: string
     default: us-east-1
@@ -31,8 +26,7 @@ steps:
   - aws-ecr/build_and_push_image:
       auth:
         - aws-cli/setup:
-            aws_access_key_id: << parameters.access_key >>
-            aws_secret_access_key: << parameters.secret_key >>
+            role-arn: << parameters.role_arn >>
             region: << parameters.region >>
       account_id: << parameters.account_id >>
       attach_workspace: true

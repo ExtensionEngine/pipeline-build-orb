@@ -1,4 +1,4 @@
 description: >
   Default executor using Docker and Node.
 docker:
-  - image: cimg/base:stable-20.04
+  - image: cimg/base:current
