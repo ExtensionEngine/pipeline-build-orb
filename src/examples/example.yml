@@ -8,5 +8,6 @@ usage:
     use-my-orb:
       jobs:
         - studion-build/build_server:
-            - param1: 1
-            - param2: 2
+            role_arn: <ARN of OpenID role>
+            account_id: <AWS account ID>
+            ecr_repo: <repo_name>
