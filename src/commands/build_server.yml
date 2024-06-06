@@ -1,8 +1,5 @@
 description: >
   Build Docker image and push to AWS ECR.
-executor:
-  name: aws-ecr/default
-  docker_layer_caching: true
 parameters:
   role_arn:
     type: string
@@ -21,7 +18,6 @@ parameters:
     type: string
     default: ""
     description: Extra build args passed to docker builder.
-resource_class: medium
 steps:
   - aws-ecr/build_and_push_image:
       auth:
