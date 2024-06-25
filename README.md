@@ -18,6 +18,14 @@ _**Use this orb to build NodeJS projects and publish to AWS ECR.**_
 
 [CircleCI Orb Docs](https://circleci.com/docs/orb-intro/#section=configuration) - Docs for using, creating, and publishing CircleCI Orbs.
 
+# Building frontend
+
+The job installs dependencies and runs npm build script. When the build is finished,
+the files are stored as CircleCI artifacts and persisted to workspace.
+
+Persisting the files to workspace makes it easier to fetch the files in a following job,
+for example when we want to upload the frontend to S3 or other hosting service.
+
 # Setting up OpenID for AWS
 
 ## Intro

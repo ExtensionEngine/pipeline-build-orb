@@ -1,0 +1,15 @@
+description: >
+  This is how we can use this job to build frontend with node package manager.
+usage:
+  version: 2.1
+  orbs:
+    studion-build: studion/studion-build@1.0.0
+  workflows:
+    use-my-orb:
+      jobs:
+        - studion-build/build_frontend:
+            package_manager: <npm by default>
+            install_command: <npm ci by default>
+            project_root: <location of project root directory>
+            cache_version: <use this to clear CircleCI cache>
+            checkout: <set to false to prevent git checkout>

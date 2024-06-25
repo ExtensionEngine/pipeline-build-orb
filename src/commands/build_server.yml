@@ -1,5 +1,4 @@
-description: >
-  Build Docker image and push to AWS ECR.
+description: Build Docker image and push to AWS ECR.
 parameters:
   role_arn:
     type: string
@@ -18,6 +17,10 @@ parameters:
     type: string
     default: ""
     description: Extra build args passed to docker builder.
+  checkout:
+    type: boolean
+    default: true
+    description: Flag that sets should this job checkout the code from git repo.
 steps:
   - aws-ecr/build_and_push_image:
       auth:
@@ -26,7 +29,7 @@ steps:
             region: << parameters.region >>
       account_id: << parameters.account_id >>
       attach_workspace: true
-      checkout: false
+      checkout: << parameters.checkout >>
       extra_build_args: << parameters.extra_build_args >>
       region: << parameters.region >>
       repo: << parameters.ecr_repo >>
