@@ -17,7 +17,11 @@ parameters:
     default: true
     description: Flag to set if the code should be checked out from git repo.
 steps:
-  - checkout
+  - when:
+      condition:
+        equal: [true, << parameters.checkout >>]
+      steps:
+        - checkout
   - studion-core/install_dependencies:
       pkg_manager: << parameters.package_manager >>
       install_command: << parameters.install_command >>
