@@ -1,0 +1,31 @@
+description: Build frontend SPA app and store as build artifacts.
+parameters:
+  package_manager:
+    type: string
+    default: npm
+  install_command:
+    type: string
+    default: "npm ci"
+  project_root:
+    type: string
+    default: .
+  cache_version:
+    type: string
+    default: 'v1'
+  checkout:
+    type: boolean
+    default: true
+    description: Flag to set if the code should be checked out from git repo.
+steps:
+  - checkout
+  - studion-core/install_dependencies:
+      pkg_manager: << parameters.package_manager >>
+      install_command: << parameters.install_command >>
+      cache_version: << parameters.cache_version >>
+  - run: << parameters.package_manager >> run build
+  - persist_to_workspace:
+      root: .
+      paths:
+        - dist
+  - store_artifacts:
+      path: ./dist
